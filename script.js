@@ -7,7 +7,7 @@ const getComputerChoice = () => {
 function playRound(playerSelection, computerSelection) {
     const losingMsg = `You Lose! ${computerSelection} beats ${playerSelection}`;
     const winningMsg = `You Win! ${playerSelection} beats ${computerSelection}`;
-    const drawMsg = "Draw!";
+    const drawMsg = `Draw! Both of you use ${computerSelection}`;
     const playerSelectionLowercase = `${playerSelection}`.toLowerCase();
     const errorMsg = "Please enter a valid input"
     if (choices.indexOf(playerSelectionLowercase) == -1 ) {
