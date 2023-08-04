@@ -3,10 +3,12 @@ const getComputerChoice = () => {
   const random_choice = Math.floor(Math.random() * choices.length);
   return choices[random_choice];
 };
-const rock = document.getElementById("rock");
-rock.addEventListener("click", (e) => {
-  console.log("yo");
-});
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) =>
+  button.addEventListener("click", (e) => {
+    console.log(playRound(e.target.id, getComputerChoice()));
+  })
+);
 
 function playRound(playerSelection, computerSelection) {
   const losingMsg = `You Lose! ${computerSelection} beats ${playerSelection}`;
