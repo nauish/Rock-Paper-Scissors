@@ -4,12 +4,18 @@ const getComputerChoice = () => {
   return choices[random_choice];
 };
 const buttons = document.querySelectorAll("button");
+const playerWins = "";
+const computerWins = "";
+
 buttons.forEach((button) =>
   button.addEventListener("click", (e) => {
     const div = document.getElementById("result");
     const result = document.createTextNode(
       playRound(e.target.id, getComputerChoice())
     );
+    if (div.hasChildNodes) {
+      div.replaceChildren(result);
+    }
     div.appendChild(result);
   })
 );
