@@ -6,7 +6,11 @@ const getComputerChoice = () => {
 const buttons = document.querySelectorAll("button");
 buttons.forEach((button) =>
   button.addEventListener("click", (e) => {
-    console.log(playRound(e.target.id, getComputerChoice()));
+    const div = document.getElementById("result");
+    const result = document.createTextNode(
+      playRound(e.target.id, getComputerChoice())
+    );
+    div.appendChild(result);
   })
 );
 
