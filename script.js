@@ -4,8 +4,8 @@ const getComputerChoice = () => {
   return choices[random_choice];
 };
 const buttons = document.querySelectorAll("button");
-const playerWins = "";
-const computerWins = "";
+const playerScore = 0;
+const computerScore = 0;
 
 buttons.forEach((button) =>
   button.addEventListener("click", (e) => {
@@ -26,6 +26,7 @@ function playRound(playerSelection, computerSelection) {
   const drawMsg = `Draw! Both of you use ${computerSelection}`;
   const playerSelectionLowercase = `${playerSelection}`.toLowerCase();
   const errorMsg = "Please enter a valid input";
+
   if (choices.indexOf(playerSelectionLowercase) == -1) {
     return errorMsg;
   } else if (playerSelectionLowercase == computerSelection) {
@@ -33,14 +34,29 @@ function playRound(playerSelection, computerSelection) {
   } else {
     switch (playerSelectionLowercase) {
       case "rock":
-        if (computerSelection == "scissors") return winningMsg;
-        else return losingMsg;
+        if (computerSelection == "scissors") {
+          playerScore += 1;
+          return winningMsg;
+        } else {
+          computerScore += 1;
+          return losingMsg;
+        }
       case "paper":
-        if (computerSelection == "rock") return winningMsg;
-        else return losingMsg;
+        if (computerSelection == "rock") {
+          playerScore += 1;
+          return winningMsg;
+        } else {
+          computerScore += 1;
+          return losingMsg;
+        }
       case "scissors":
-        if (computerSelection == "paper") return winningMsg;
-        else return losingMsg;
+        if (computerSelection == "paper") {
+          playerScore += 1;
+          return winningMsg;
+        } else {
+          computerScore += 1;
+          return losingMsg;
+        }
     }
   }
 }
