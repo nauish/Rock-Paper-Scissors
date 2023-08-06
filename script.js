@@ -1,5 +1,5 @@
 const choices = ["rock", "paper", "scissors"];
-const winConditions = {
+const logic = {
   rock: "scissors",
   paper: "rock",
   scissors: "paper",
@@ -16,31 +16,35 @@ buttons.forEach((button) =>
   button.addEventListener("click", (e) => {
     const playerScoreDisplay = document.createElement("p");
     const computerScoreDisplay = document.createElement("p");
+    const winMsg = document.createElement("p");
     const div = document.getElementById("result");
-    const p = document.createElement("p");
     const resultText = document.createTextNode(
       playRound(e.target.id, getComputerChoice())
     );
 
     playerScoreDisplay.textContent = `Player wins ${playerScore} times`;
     computerScoreDisplay.textContent = `Computer wins ${computerScore} times`;
-
     if (div.hasChildNodes) {
       div.replaceChildren(resultText);
     }
 
     div.appendChild(resultText);
-    div.appendChild(p);
-    p.appendChild(playerScoreDisplay);
-    p.appendChild(computerScoreDisplay);
+    div.appendChild(playerScoreDisplay);
+    div.appendChild(computerScoreDisplay);
+    if (playerScore >= 5) {
+      winMsg.textContent = "You won!";
+      div.appendChild(winMsg);
+    } else if (computerScore >= 5) {
+      winMsg.textContent = "Computer wins!";
+      div.appendChild(winMsg);
+    }
   })
 );
 
 function playRound(playerSelection, computerSelection) {
   const playerSelectionLowercase = `${playerSelection}`.toLowerCase();
 
-  const playerWins =
-    winConditions[playerSelectionLowercase] === computerSelection;
+  const playerWins = logic[playerSelectionLowercase] === computerSelection;
 
   const errorMsg = "Please enter a valid input";
   if (!choices.includes(playerSelectionLowercase)) {
@@ -54,9 +58,9 @@ function playRound(playerSelection, computerSelection) {
 
   if (playerWins) {
     playerScore += 1;
-    return `You Win! ${playerSelection} beats ${computerSelection}`;
+    return `You win this round since ${playerSelection} beats ${computerSelection}`;
   } else {
     computerScore += 1;
-    return `You Lose! ${computerSelection} beats ${playerSelection}`;
+    return `Computer wins this round since ${computerSelection} beats ${playerSelection}`;
   }
 }
