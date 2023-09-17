@@ -1,17 +1,20 @@
 const choices = ["rock", "paper", "scissors"];
-const logic = {
+
+const winningCondition = {
   rock: "scissors",
   paper: "rock",
   scissors: "paper",
 };
-const getComputerChoice = () => {
+
+function getComputerChoice() {
   const random_choice = Math.floor(Math.random() * choices.length);
   return choices[random_choice];
-};
-const buttons = document.querySelectorAll("button");
+}
+
 let playerScore = 0;
 let computerScore = 0;
 
+const buttons = document.querySelectorAll("button");
 buttons.forEach((button) =>
   button.addEventListener("click", (e) => {
     const playerScoreDisplay = document.createElement("p");
@@ -27,7 +30,6 @@ buttons.forEach((button) =>
     if (div.hasChildNodes) {
       div.replaceChildren(resultText);
     }
-
     div.appendChild(resultText);
     div.appendChild(playerScoreDisplay);
     div.appendChild(computerScoreDisplay);
@@ -44,7 +46,8 @@ buttons.forEach((button) =>
 function playRound(playerSelection, computerSelection) {
   const playerSelectionLowercase = `${playerSelection}`.toLowerCase();
 
-  const playerWins = logic[playerSelectionLowercase] === computerSelection;
+  const playerWins =
+    winningCondition[playerSelectionLowercase] === computerSelection;
 
   const errorMsg = "Please enter a valid input";
   if (!choices.includes(playerSelectionLowercase)) {
@@ -52,11 +55,9 @@ function playRound(playerSelection, computerSelection) {
   }
 
   const drawMsg = `Draw! Both of you use ${computerSelection}`;
-  if (playerSelectionLowercase == computerSelection) {
+  if (playerSelectionLowercase === computerSelection) {
     return drawMsg;
-  }
-
-  if (playerWins) {
+  } else if (playerWins) {
     playerScore += 1;
     return `You win this round since ${playerSelection} beats ${computerSelection}`;
   } else {
